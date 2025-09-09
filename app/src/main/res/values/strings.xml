@@ -1,0 +1,35 @@
+<resources>
+    <string name="app_name">ShopNTrack</string>
+    <string name="action_settings">Settings</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+    <string name="conclude">Conclude</string>
+
+    <string name="initial_instructions">
+        One day this app will be quite useful but so far its pretty much worthless.
+        With this I suppose you should just click next.
+    </string>
+    <string name="second_instructions">
+        One day this app will be quite useful but so far its pretty much worthless.
+        With this... I suppose you should just click conclude this time.
+    </string>
+    <string name="main_fragment">main</string>
+
+    <!-- Shop add activity -->
+
+    <string name="insert_shop_name">What is it called?</string>
+    <string name="insert_shop_type">What kind of things do you buy there?</string>
+    <string name="shop_name">NAME</string>
+    <string name="shop_type">TYPE</string>
+
+    <string name="nothing_filled">You still have to fill the fields!!</string>
+    <string name="no_name">There is no shop without a name, I believe…</string>
+    <string name="no_type">But what do you buy there? Groceries? Tools?</string>
+
+    <string name="no_shops_yet">Once there are shops, they will come up here!</string>
+
+    <string name="save">Save</string>
+</resources>
