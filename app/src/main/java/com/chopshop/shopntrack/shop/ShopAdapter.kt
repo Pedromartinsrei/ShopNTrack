@@ -32,8 +32,6 @@ class ShopAdapter: ListAdapter<Shop, ShopViewHolder>(ShopDiffUtil) {
     @SuppressLint("NotifyDataSetChanged")
     fun updateList(shopList: List<Shop>) {
         this.submitList(shopList)
-
-
     }
 
 }

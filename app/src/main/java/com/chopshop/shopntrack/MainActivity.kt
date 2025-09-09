@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -16,12 +17,17 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.chopshop.shopntrack.API.APIHelper
+import com.chopshop.shopntrack.API.APIInterface
 import com.chopshop.shopntrack.databinding.ActivityAddShopBinding
 import com.chopshop.shopntrack.shop.AddShopActivity
 import com.chopshop.shopntrack.databinding.ActivityMainBinding
 import com.chopshop.shopntrack.shop.Shop
 import com.chopshop.shopntrack.shop.ShopActivity
 import com.chopshop.shopntrack.shop.ShopAdapter
+import kotlinx.coroutines.DelicateCoroutinesApi
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 
 class MainActivity : AppCompatActivity() {
@@ -32,6 +38,7 @@ class MainActivity : AppCompatActivity() {
     private var shopList = ArrayList<Shop>();
     private val shopAdapter = ShopAdapter()
 
+    @OptIn(DelicateCoroutinesApi::class)
     @SuppressLint("NotifyDataSetChanged")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,6 +49,18 @@ class MainActivity : AppCompatActivity() {
         binding.layout.shopList.adapter = shopAdapter
         binding.layout.shopList.layoutManager = LinearLayoutManager(this)
 
+        val apiRequest = APIHelper.getInstance().create(APIInterface::class.java)
+
+        GlobalScope.launch {
+            val result = apiRequest.getHello()
+            result.body()?.let { Log.d("GOT AN ANSWER", it.getName()) }
+            result.body()?.let { shopList.add(it)
+                binding.layout.emptyView.visibility = View.INVISIBLE
+                binding.layout.shopList.visibility = View.VISIBLE
+                shopAdapter.updateList(shopList)
+                shopAdapter.notifyDataSetChanged()
+            }
+        }
 
         if(shopList.isEmpty()) {
             binding.layout.emptyView.visibility = View.VISIBLE
